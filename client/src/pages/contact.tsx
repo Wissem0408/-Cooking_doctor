@@ -10,10 +10,10 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-              Get in Touch
+              Contactez-Nous
             </h1>
             <p className="text-xl text-espresso/70 mb-12">
-              Have questions or special requests? We'd love to hear from you
+              Vous avez des questions ou des demandes spéciales ? Nous aimerions avoir de vos nouvelles
             </p>
             
             <div className="grid md:grid-cols-2 gap-8">
@@ -22,8 +22,8 @@ export default function Contact() {
                   <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
                     <Instagram className="text-espresso text-2xl" />
                   </div>
-                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Follow Us</h3>
-                  <p className="text-espresso/70 mb-6">Stay updated with our latest creations and behind-the-scenes content</p>
+                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Suivez-Nous</h3>
+                  <p className="text-espresso/70 mb-6">Restez informé de nos dernières créations et du contenu en coulisses</p>
                   <Button className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold">
                     @tiramisubycookingdoctor
                   </Button>
@@ -35,13 +35,13 @@ export default function Contact() {
                   <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
                     <MessageCircle className="text-espresso text-2xl" />
                   </div>
-                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">WhatsApp Order</h3>
-                  <p className="text-espresso/70 mb-6">Quick and easy ordering through WhatsApp</p>
+                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Commande WhatsApp</h3>
+                  <p className="text-espresso/70 mb-6">Commande rapide et facile via WhatsApp</p>
                   <Button 
                     className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold"
                     onClick={() => window.open("https://wa.me/YOUR_PHONE_NUMBER?text=Hi, I'd like to order tiramisu!", "_blank")}
                   >
-                    Message Us
+                    Écrivez-Nous
                   </Button>
                 </CardContent>
               </Card>
