@@ -221,14 +221,14 @@ export default function Order() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Personal Information */}
                 <div className="space-y-6">
-                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Personal Information</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Informations Personnelles</h3>
                   
                   <FormField
                     control={form.control}
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Full Name</FormLabel>
+                        <FormLabel className="text-espresso">Nom Complet</FormLabel>
                         <FormControl>
                           <Input {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                         </FormControl>
@@ -242,7 +242,7 @@ export default function Order() {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Phone Number</FormLabel>
+                        <FormLabel className="text-espresso">Numéro de Téléphone</FormLabel>
                         <FormControl>
                           <Input type="tel" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                         </FormControl>
@@ -256,7 +256,7 @@ export default function Order() {
                     name="deliveryAddress"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Delivery Address</FormLabel>
+                        <FormLabel className="text-espresso">Adresse de Livraison</FormLabel>
                         <FormControl>
                           <Textarea {...field} rows={3} className="bg-warmWhite border-espresso/20 focus:border-gold resize-none" />
                         </FormControl>
@@ -268,10 +268,10 @@ export default function Order() {
 
                 {/* Order Details */}
                 <div className="space-y-6">
-                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Order Details</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Détails de la Commande</h3>
                   
                   <div className="space-y-4">
-                    <h4 className="font-semibold text-espresso">Select Your Tiramisu</h4>
+                    <h4 className="font-semibold text-espresso">Choisissez Votre Tiramisu</h4>
                     
                     {/* Tiramisu Pistache */}
                     <div className="p-4 bg-warmWhite rounded-lg border border-espresso/20">
