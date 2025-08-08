@@ -12,8 +12,10 @@ export default function Footer() {
             Créer des moments de joie, un tiramisu à la fois
           </p>
           <div className="flex justify-center space-x-6 mb-8">
-            <a 
-              href="https://www.instagram.com/cooking_doctor/" 
+            <a
+              href="https://www.instagram.com/cooking_doctor/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 bg-gold rounded-full flex items-center justify-center hover:bg-opacity-90 transition-colors duration-300"
             >
               <Instagram className="w-5 h-5 text-espresso" />
