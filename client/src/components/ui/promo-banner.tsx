@@ -6,7 +6,7 @@ export default function PromoBanner() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center space-x-2">
           <Gift className="w-4 h-4" />
-          <span>Pré-commande pour les Fêtes – Places Limit��es Disponibles !</span>
+          <span>Pré-commande pour les Fêtes – Places Limitées Disponibles !</span>
         </div>
       </div>
     </div>
