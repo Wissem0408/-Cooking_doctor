@@ -81,14 +81,14 @@ export default function Order() {
     onSuccess: () => {
       setIsSubmitted(true);
       toast({
-        title: "Order Submitted!",
-        description: "We'll contact you shortly to confirm your order.",
+        title: "Commande Envoyée !",
+        description: "Nous vous contacterons bientôt pour confirmer votre commande.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Order Failed",
-        description: "There was an error submitting your order. Please try again.",
+        title: "Échec de la Commande",
+        description: "Il y a eu une erreur lors de l'envoi de votre commande. Veuillez réessayer.",
         variant: "destructive",
       });
       console.error("Order submission error:", error);
@@ -146,8 +146,8 @@ export default function Order() {
 
     if (products.length === 0) {
       toast({
-        title: "No Products Selected",
-        description: "Please select at least one tiramisu product.",
+        title: "Aucun Produit Sélectionné",
+        description: "Veuillez sélectionner au moins un produit tiramisu.",
         variant: "destructive",
       });
       return;
