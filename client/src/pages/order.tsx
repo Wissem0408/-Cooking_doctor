@@ -178,10 +178,10 @@ export default function Order() {
             <Card className="bg-gold/10 border-gold shadow-xl">
               <CardContent className="p-12">
                 <CheckCircle className="w-16 h-16 text-gold mx-auto mb-6" />
-                <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Thank You!</h1>
+                <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Merci !</h1>
                 <p className="text-lg text-espresso/80 mb-6">
-                  We've received your order and will contact you shortly to confirm the details. 
-                  Get ready for an amazing tiramisu experience!
+                  Nous avons reçu votre commande et vous contacterons bientôt pour confirmer les détails.
+                  Préparez-vous pour une expérience tiramisu incroyable !
                 </p>
                 <Button 
                   onClick={() => {
@@ -191,7 +191,7 @@ export default function Order() {
                   variant="outline"
                   className="border-gold text-gold hover:bg-gold hover:text-espresso"
                 >
-                  Place Another Order
+                  Passer une Autre Commande
                 </Button>
               </CardContent>
             </Card>
