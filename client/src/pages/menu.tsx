@@ -7,7 +7,7 @@ export default function Menu() {
       id: "pistache",
       name: "Tiramisu Pistache",
       description: "Crème de pistache riche avec mascarpone authentique, créant une expérience gustative élégante et sophistiquée.",
-      image: "https://images.pexels.com/photos/1346217/pexels-photo-1346217.jpeg",
+      image: "https://cdn.builder.io/api/v1/image/assets%2F804825e2f14f4ab48635fbc8de146b1e%2F4b5949b4dd2343548da2118586b35f05?format=webp&width=800",
       pricing: { small: 10, medium: 15, party: 0 },
     },
     {
