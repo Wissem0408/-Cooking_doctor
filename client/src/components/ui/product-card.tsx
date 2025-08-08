@@ -8,7 +8,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const isComingSoon = product.badge === "Coming Soon";
+  const isComingSoon = product.badge === "Bientôt Disponible";
   
   return (
     <Card className={`bg-warmWhite shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 ${isComingSoon ? 'opacity-75' : ''}`}>
@@ -43,30 +43,30 @@ export default function ProductCard({ product }: ProductCardProps) {
               ) : (
                 <>
                   <div className="flex justify-between items-center">
-                    <span className="font-sans">Small</span>
+                    <span className="font-sans">Petit</span>
                     <span className="font-semibold text-espresso">{product.pricing.small} DT</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-sans">Large</span>
+                    <span className="font-sans">Grand</span>
                     <span className="font-semibold text-espresso">{product.pricing.medium} DT</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-sans">Birthday</span>
-                    <span className="font-semibold text-espresso italic text-sm">Custom Price</span>
+                    <span className="font-sans">Anniversaire</span>
+                    <span className="font-semibold text-espresso italic text-sm">Prix Sur Mesure</span>
                   </div>
                 </>
               )}
             </div>
             <Link href="/order">
               <Button className="w-full bg-gold text-espresso hover:bg-gold/90 transition-colors duration-300 font-sans">
-                Order Now
+                Commander Maintenant
               </Button>
             </Link>
           </>
         ) : (
           <div className="text-center py-4">
             <Button disabled className="w-full bg-espresso/20 text-espresso/50 cursor-not-allowed font-sans">
-              Coming Soon
+              Bientôt Disponible
             </Button>
           </div>
         )}
