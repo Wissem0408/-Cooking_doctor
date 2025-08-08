@@ -39,12 +39,19 @@ export default function InstagramGallery() {
         </div>
         
         <div className="text-center mt-12">
-          <Button 
+          <Button
             variant="outline"
             className="bg-gold text-espresso border-gold hover:bg-gold/90 px-8 py-4 rounded-full font-semibold"
+            asChild
           >
-            <Instagram className="mr-3 w-5 h-5" />
-            Follow @tiramisubycookingdoctor
+            <a
+              href="https://www.instagram.com/cooking_doctor/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="mr-3 w-5 h-5" />
+              Follow @tiramisubycookingdoctor
+            </a>
           </Button>
         </div>
       </div>
