@@ -60,10 +60,10 @@ export default function Stores() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="font-playfair text-5xl font-bold text-espresso mb-6">
-            Where to Find Us
+            Où Nous Trouver
           </h1>
           <p className="text-xl text-espresso/80 max-w-3xl mx-auto leading-relaxed">
-            Discover our premium tiramisu collection at these carefully selected retail partners across Tunisia
+            Découvrez notre collection de tiramisu premium chez ces partenaires de vente au détail soigneusement sélectionnés à travers la Tunisie
           </p>
         </div>
         
@@ -96,7 +96,7 @@ export default function Stores() {
                         </div>
                       )}
                       {!store.instagram && (
-                        <p className="text-espresso/70">Contact directly</p>
+                        <p className="text-espresso/70">Contacter directement</p>
                       )}
                     </CardContent>
                   </Card>
@@ -109,16 +109,16 @@ export default function Stores() {
         {/* Call to Action */}
         <div className="text-center mt-16 p-8 bg-warmWhite rounded-2xl shadow-lg">
           <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">
-            Want to Stock Our Products?
+            Vous Voulez Vendre Nos Produits ?
           </h3>
           <p className="text-espresso/70 mb-6">
-            Interested in becoming a retail partner? Contact us to learn about wholesale opportunities.
+            Intéressé à devenir partenaire de vente ? Contactez-nous pour en savoir plus sur les opportunités de vente en gros.
           </p>
           <a
             href="/contact"
             className="inline-block bg-gold text-espresso px-8 py-3 rounded-full font-semibold hover:bg-gold/90 transition-colors duration-300"
           >
-            Get in Touch
+            Contactez-Nous
           </a>
         </div>
       </div>
