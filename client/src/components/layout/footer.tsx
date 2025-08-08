@@ -1,6 +1,35 @@
 import { Instagram, MessageCircle, Mail } from "lucide-react";
 
 export default function Footer() {
+  const handleEmailClick = async (e: React.MouseEvent) => {
+    const email = "asmahannechi@gmail.com";
+
+    // Try mailto first
+    const mailto = `mailto:${email}`;
+
+    try {
+      window.location.href = mailto;
+
+      // If mailto doesn't work (no default email client), copy to clipboard
+      setTimeout(async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          alert(`Email address copied to clipboard: ${email}`);
+        } catch (err) {
+          console.log("Could not copy email to clipboard");
+          alert(`Please copy this email address: ${email}`);
+        }
+      }, 1000);
+    } catch (err) {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(email);
+        alert(`Email address copied to clipboard: ${email}`);
+      } catch (clipboardErr) {
+        alert(`Please copy this email address: ${email}`);
+      }
+    }
+  };
   return (
     <footer className="bg-espresso text-warmWhite py-12">
       <div className="container mx-auto px-4">
