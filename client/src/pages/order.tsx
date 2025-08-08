@@ -207,10 +207,10 @@ export default function Order() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-              Place Your Order
+              Passez Votre Commande
             </h1>
             <p className="text-xl text-espresso/70 max-w-2xl mx-auto">
-              Just a few details and your premium tiramisu will be on its way
+              Juste quelques détails et votre tiramisu premium sera en route
             </p>
           </div>
           
