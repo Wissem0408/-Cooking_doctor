@@ -50,12 +50,8 @@ export default function Contact() {
             <div className="mt-12 pt-8 border-t border-espresso/20">
               <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-espresso/60">
                 <div className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  <span>hello@tiramisubycookingdoctor.com</span>
+                  <span>asmahannechi@gmail.com</span>
                 </div>
               </div>
             </div>
