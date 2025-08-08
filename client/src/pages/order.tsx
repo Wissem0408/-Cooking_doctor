@@ -431,7 +431,7 @@ export default function Order() {
                   name="deliveryDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-espresso">Delivery Date</FormLabel>
+                      <FormLabel className="text-espresso">Date de Livraison</FormLabel>
                       <FormControl>
                         <Input type="date" min={today} {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                       </FormControl>
@@ -445,7 +445,7 @@ export default function Order() {
                   name="deliveryTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-espresso">Preferred Time</FormLabel>
+                      <FormLabel className="text-espresso">Heure Préférée</FormLabel>
                       <FormControl>
                         <Input type="time" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                       </FormControl>
@@ -461,7 +461,7 @@ export default function Order() {
                 name="notes"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-espresso">Special Notes (allergies, occasion, etc.)</FormLabel>
+                    <FormLabel className="text-espresso">Notes Spéciales (allergies, occasion, etc.)</FormLabel>
                     <FormControl>
                       <Textarea {...field} rows={3} className="bg-warmWhite border-espresso/20 focus:border-gold resize-none" />
                     </FormControl>
@@ -476,7 +476,7 @@ export default function Order() {
                 name="paymentMethod"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-espresso font-semibold">Payment Method</FormLabel>
+                    <FormLabel className="text-espresso font-semibold">Méthode de Paiement</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -487,7 +487,7 @@ export default function Order() {
                           <RadioGroupItem value="cash" id="cash" />
                           <label htmlFor="cash" className="flex items-center font-medium">
                             <i className="fas fa-money-bill-wave mr-2 text-gold"></i>
-                            Cash on Delivery
+                            Paiement à la Livraison
                           </label>
                         </div>
                       </RadioGroup>
