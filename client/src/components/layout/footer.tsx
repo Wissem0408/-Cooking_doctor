@@ -9,7 +9,7 @@ export default function Footer() {
             Tiramisu by Cooking Doctor
           </div>
           <p className="text-warmWhite/70 mb-6">
-            Crafting moments of joy, one tiramisu at a time
+            Créer des moments de joie, un tiramisu à la fois
           </p>
           <div className="flex justify-center space-x-6 mb-8">
             <a 
@@ -32,7 +32,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="text-warmWhite/50 text-sm">
-            © 2024 Tiramisu by Cooking Doctor. Made with ❤️ and lots of mascarpone.
+            © 2024 Tiramisu by Cooking Doctor. Fait avec ❤️ et beaucoup de mascarpone.
           </p>
         </div>
       </div>
