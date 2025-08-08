@@ -7,24 +7,24 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "How long does tiramisu last?",
-      answer: "Our fresh tiramisu is best enjoyed within 3-4 days when stored in the refrigerator. We recommend consuming it within 48 hours for the optimal taste experience.",
+      question: "Combien de temps se conserve le tiramisu ?",
+      answer: "Notre tiramisu frais se déguste mieux dans les 3-4 jours lorsqu'il est conservé au réfrigérateur. Nous recommandons de le consommer dans les 48 heures pour une expérience gustative optimale.",
     },
     {
-      question: "Do you use raw eggs?",
-      answer: "Yes, our traditional recipe includes pasteurized raw eggs for authentic flavor and texture. We use only the highest quality, farm-fresh eggs from trusted suppliers.",
+      question: "Utilisez-vous des œufs crus ?",
+      answer: "Oui, notre recette traditionnelle inclut des œufs crus pasteurisés pour une saveur et une texture authentiques. Nous utilisons uniquement des œufs frais de la ferme de la plus haute qualité provenant de fournisseurs de confiance.",
     },
     {
-      question: "Do you deliver outside the city?",
-      answer: "We currently deliver within a 25km radius of the city center. For special occasions or larger orders, we may consider extended delivery areas. Please contact us to discuss your specific needs.",
+      question: "Livrez-vous en dehors de la ville ?",
+      answer: "Nous livrons actuellement dans un rayon de 25 km du centre-ville. Pour des occasions spéciales ou des commandes plus importantes, nous pouvons considérer des zones de livraison étendues. Veuillez nous contacter pour discuter de vos besoins spécifiques.",
     },
     {
-      question: "Can I customize flavors for special events?",
-      answer: "Absolutely! We love creating custom flavors for weddings, birthdays, and corporate events. Contact us at least 48 hours in advance to discuss your special requirements.",
+      question: "Puis-je personnaliser les saveurs pour des événements spéciaux ?",
+      answer: "Absolument ! Nous adorons créer des saveurs personnalisées pour les mariages, anniversaires et événements d'entreprise. Contactez-nous au moins 48 heures à l'avance pour discuter de vos exigences spéciales.",
     },
     {
-      question: "What's included in the Party Box?",
-      answer: "Our Party Box serves 8-10 people and comes with disposable spoons, napkins, and serving instructions. Perfect for gatherings, office treats, or family celebrations.",
+      question: "Qu'est-ce qui est inclus dans la Boîte Fête ?",
+      answer: "Notre Boîte Fête sert 8-10 personnes et est livrée avec des cuillères jetables, des serviettes et des instructions de service. Parfaite pour les rassemblements, les gâteries de bureau ou les célébrations familiales.",
     },
   ];
 
@@ -38,10 +38,10 @@ export default function FAQ() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-              Frequently Asked Questions
+              Questions Fréquemment Posées
             </h2>
             <p className="text-xl text-espresso/70">
-              Everything you need to know about our tiramisu
+              Tout ce que vous devez savoir sur notre tiramisu
             </p>
           </div>
           
