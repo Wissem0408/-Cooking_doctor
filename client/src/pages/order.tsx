@@ -505,11 +505,11 @@ export default function Order() {
                   className="w-full md:w-auto bg-gold text-espresso px-12 py-4 rounded-full font-bold text-lg hover:bg-gold/90 transform hover:scale-105 transition-all duration-300 shadow-lg"
                 >
                   {submitOrderMutation.isPending ? (
-                    "Submitting..."
+                    "Envoi en cours..."
                   ) : (
                     <>
                       <Send className="mr-2 w-5 h-5" />
-                      Place Your Order
+                      Passez Votre Commande
                     </>
                   )}
                 </Button>
