@@ -18,11 +18,11 @@ import { orderSchema, type Order } from "@shared/schema";
 import { z } from "zod";
 
 const orderFormSchema = z.object({
-  fullName: z.string().min(1, "Full name is required"),
-  phoneNumber: z.string().min(1, "Phone number is required"),
-  deliveryAddress: z.string().min(1, "Delivery address is required"),
-  deliveryDate: z.string().min(1, "Delivery date is required"),
-  deliveryTime: z.string().min(1, "Delivery time is required"),
+  fullName: z.string().min(1, "Le nom complet est requis"),
+  phoneNumber: z.string().min(1, "Le numéro de téléphone est requis"),
+  deliveryAddress: z.string().min(1, "L'adresse de livraison est requise"),
+  deliveryDate: z.string().min(1, "La date de livraison est requise"),
+  deliveryTime: z.string().min(1, "L'heure de livraison est requise"),
   notes: z.string().optional(),
   paymentMethod: z.literal("cash"),
   // Product selections - separate fields for each size
