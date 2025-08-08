@@ -282,9 +282,9 @@ export default function Order() {
                           name="pistacheSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -294,9 +294,9 @@ export default function Order() {
                           name="pistacheLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -306,9 +306,9 @@ export default function Order() {
                           name="pistacheBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -325,9 +325,9 @@ export default function Order() {
                           name="speculoosSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -337,9 +337,9 @@ export default function Order() {
                           name="speculoosLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -349,9 +349,9 @@ export default function Order() {
                           name="speculoosBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -368,9 +368,9 @@ export default function Order() {
                           name="noisetteSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -380,9 +380,9 @@ export default function Order() {
                           name="noisetteLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -392,9 +392,9 @@ export default function Order() {
                           name="noisetteBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -413,7 +413,7 @@ export default function Order() {
                             <FormItem>
                               <FormLabel className="text-sm">Sans sucre 72% cacao (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
