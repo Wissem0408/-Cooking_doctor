@@ -29,6 +29,19 @@ export default function Contact() {
                   </Button>
                 </CardContent>
               </Card>
+
+              <Card className="bg-cream shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Instagram className="text-espresso text-2xl" />
+                  </div>
+                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Suivez-Nous</h3>
+                  <p className="text-espresso/70 mb-6">Restez informé de nos dernières créations et du contenu en coulisses</p>
+                  <Button className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold">
+                    @bycookingdoctor
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
             
             <div className="mt-12 pt-8 border-t border-espresso/20">
