@@ -50,7 +50,7 @@ export default function InstagramGallery() {
               rel="noopener noreferrer"
             >
               <Instagram className="mr-3 w-5 h-5" />
-              Follow @tiramisubycookingdoctor
+              @cooking_doctor
             </a>
           </Button>
         </div>
