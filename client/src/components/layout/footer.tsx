@@ -13,26 +13,20 @@ export default function Footer() {
           </p>
           <div className="flex justify-center space-x-6 mb-8">
             <a 
-              href="#" 
+              href="https://www.instagram.com/cooking_doctor/" 
               className="w-12 h-12 bg-gold rounded-full flex items-center justify-center hover:bg-opacity-90 transition-colors duration-300"
             >
               <Instagram className="w-5 h-5 text-espresso" />
             </a>
             <a 
-              href="https://wa.me/YOUR_PHONE_NUMBER?text=Hi, I'd like to order tiramisu!" 
-              className="w-12 h-12 bg-gold rounded-full flex items-center justify-center hover:bg-opacity-90 transition-colors duration-300"
-            >
-              <MessageCircle className="w-5 h-5 text-espresso" />
-            </a>
-            <a 
-              href="mailto:hello@tiramisubycookingdoctor.com" 
+              href="mailto:asmahannechi3@gmail.com" 
               className="w-12 h-12 bg-gold rounded-full flex items-center justify-center hover:bg-opacity-90 transition-colors duration-300"
             >
               <Mail className="w-5 h-5 text-espresso" />
             </a>
           </div>
           <p className="text-warmWhite/50 text-sm">
-            © 2024 Tiramisu by Cooking Doctor. Fait avec ❤️ et beaucoup de mascarpone.
+            © 2025 Tiramisu by Cooking Doctor. Fait avec ❤️ et beaucoup de mascarpone.
           </p>
         </div>
       </div>
