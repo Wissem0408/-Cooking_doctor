@@ -46,11 +46,17 @@ export default function Contact() {
                   </div>
                   <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Suivez-Nous</h3>
                   <p className="text-espresso/70 mb-6">Restez informé de nos dernières créations et du contenu en coulisses</p>
-                  <Button className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold">
-                    href="https://www.instagram.com/bycookingdoctor/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    @bycookingdoctor
+                  <Button
+                    className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold"
+                    asChild
+                  >
+                    <a
+                      href="https://www.instagram.com/bycookingdoctor/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      @bycookingdoctor
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
