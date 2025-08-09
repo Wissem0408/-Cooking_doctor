@@ -256,10 +256,21 @@ export default function Order() {
                     name="deliveryAddress"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Adresse de Livraison</FormLabel>
-                        <FormControl>
-                          <Textarea {...field} rows={3} className="bg-warmWhite border-espresso/20 focus:border-gold resize-none" />
-                        </FormControl>
+                        <FormLabel className="text-espresso">Ville de Livraison</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-warmWhite border-espresso/20 focus:border-gold">
+                              <SelectValue placeholder="Sélectionnez votre ville" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Tunis">Tunis</SelectItem>
+                            <SelectItem value="Manouba">Manouba</SelectItem>
+                            <SelectItem value="Hammamet">Hammamet</SelectItem>
+                            <SelectItem value="Sousse">Sousse</SelectItem>
+                            <SelectItem value="Monastir">Monastir</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
