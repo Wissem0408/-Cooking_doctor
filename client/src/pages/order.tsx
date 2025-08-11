@@ -49,6 +49,7 @@ export default function Order() {
     resolver: zodResolver(orderFormSchema),
     defaultValues: {
       fullName: "",
+      email: "",
       phoneNumber: "",
       deliveryAddress: "",
       deliveryDate: "",
