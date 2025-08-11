@@ -157,6 +157,7 @@ export default function Order() {
 
     const orderData: Order = {
       fullName: data.fullName,
+      email: data.email,
       phoneNumber: data.phoneNumber,
       deliveryAddress: data.deliveryAddress,
       products,
