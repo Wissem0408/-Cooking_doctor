@@ -238,7 +238,21 @@ export default function Order() {
                       </FormItem>
                     )}
                   />
-                  
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-espresso">Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
                   <FormField
                     control={form.control}
                     name="phoneNumber"
