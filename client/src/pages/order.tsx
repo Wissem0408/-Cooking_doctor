@@ -19,6 +19,7 @@ import { z } from "zod";
 
 const orderFormSchema = z.object({
   fullName: z.string().min(1, "Le nom complet est requis"),
+  email: z.string().email("L'adresse email n'est pas valide").min(1, "L'email est requis"),
   phoneNumber: z.string().min(1, "Le numéro de téléphone est requis"),
   deliveryAddress: z.string().min(1, "La ville de livraison est requise"),
   deliveryDate: z.string().min(1, "La date de livraison est requise"),
