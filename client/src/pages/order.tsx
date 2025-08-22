@@ -155,6 +155,24 @@ export default function Order() {
       return;
     }
 
+    // Check if any birthday items are ordered
+    const hasBirthdayItems = products.some(product => product.size === "birthday");
+
+    // Calculate total order value (excluding birthday items which have custom pricing)
+    const totalOrderValue = products
+      .filter(product => product.size !== "birthday")
+      .reduce((total, product) => total + product.price, 0);
+
+    // Validate minimum order amount (60DT) unless birthday items are ordered
+    if (!hasBirthdayItems && totalOrderValue < 60) {
+      toast({
+        title: "Commande Minimum Non Atteinte",
+        description: `La commande minimum est de 60 DT. Votre commande actuelle: ${totalOrderValue} DT. Ajoutez plus d'articles ou commandez un gâteau d'anniversaire.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     const orderData: Order = {
       fullName: data.fullName,
       email: data.email,
