@@ -81,14 +81,19 @@ export function setupSecurity(app: Express) {
     }));
   }
 
-  // Apply general rate limiting to all requests
-  app.use(generalLimiter);
+  // Apply rate limiting only in production or when explicitly needed
+  if (!isDevelopment) {
+    // Apply general rate limiting to all requests
+    app.use(generalLimiter);
 
-  // Apply stricter rate limiting to API routes
-  app.use("/api", apiLimiter);
+    // Apply stricter rate limiting to API routes
+    app.use("/api", apiLimiter);
 
-  // Apply very strict rate limiting to order submissions
-  app.use("/api/webhook/order", orderLimiter);
+    // Apply very strict rate limiting to order submissions
+    app.use("/api/webhook/order", orderLimiter);
+  } else {
+    console.log("Rate limiting disabled in development mode");
+  }
 
   // Additional security headers
   app.use((req, res, next) => {
