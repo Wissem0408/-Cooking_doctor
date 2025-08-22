@@ -110,6 +110,66 @@ export function setupSecurity(app: Express) {
 }
 
 // Input validation helpers
-export const validateOrderInput = [
-  // Add validation rules here if needed
-];
+export function validateOrderData(data: any): { isValid: boolean; errors: string[] } {
+  const errors: string[] = [];
+
+  // Required fields validation
+  if (!data.fullName || typeof data.fullName !== 'string' || data.fullName.trim().length === 0) {
+    errors.push("Full name is required");
+  }
+
+  if (!data.email || typeof data.email !== 'string' || !isValidEmail(data.email)) {
+    errors.push("Valid email is required");
+  }
+
+  if (!data.phoneNumber || typeof data.phoneNumber !== 'string' || data.phoneNumber.trim().length === 0) {
+    errors.push("Phone number is required");
+  }
+
+  if (!data.deliveryAddress || typeof data.deliveryAddress !== 'string' || data.deliveryAddress.trim().length === 0) {
+    errors.push("Delivery address is required");
+  }
+
+  if (!data.deliveryDate || typeof data.deliveryDate !== 'string') {
+    errors.push("Delivery date is required");
+  }
+
+  if (!data.deliveryTime || typeof data.deliveryTime !== 'string') {
+    errors.push("Delivery time is required");
+  }
+
+  if (!data.products || !Array.isArray(data.products) || data.products.length === 0) {
+    errors.push("At least one product is required");
+  }
+
+  // String length limits
+  if (data.fullName && data.fullName.length > 100) {
+    errors.push("Full name too long");
+  }
+
+  if (data.phoneNumber && data.phoneNumber.length > 20) {
+    errors.push("Phone number too long");
+  }
+
+  if (data.notes && data.notes.length > 500) {
+    errors.push("Notes too long");
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
+}
+
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Sanitize input to prevent XSS
+export function sanitizeInput(input: string): string {
+  return input
+    .replace(/[<>\"']/g, '') // Remove potential XSS characters
+    .trim()
+    .slice(0, 1000); // Limit length
+}
