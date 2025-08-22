@@ -54,22 +54,9 @@ export function setupSecurity(app: Express) {
 
   // Helmet for security headers with development-friendly settings
   if (isDevelopment) {
-    // More relaxed CSP for development (Vite needs these permissions)
+    // Disable CSP in development to avoid conflicts with Vite
     app.use(helmet({
-      contentSecurityPolicy: {
-        directives: {
-          defaultSrc: ["'self'"],
-          styleSrc: ["'self'", "'unsafe-inline'", "https:", "http:"],
-          fontSrc: ["'self'", "https:", "http:", "data:"],
-          imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
-          scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-          connectSrc: ["'self'", "https:", "http:", "wss:", "ws:"],
-          frameSrc: ["'self'"],
-          objectSrc: ["'none'"],
-          baseUri: ["'self'"],
-          formAction: ["'self'"],
-        },
-      },
+      contentSecurityPolicy: false,
       crossOriginEmbedderPolicy: false,
     }));
   } else {
