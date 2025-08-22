@@ -202,7 +202,7 @@ export default function Order() {
                 <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Merci !</h1>
                 <p className="text-lg text-espresso/80 mb-6">
                   Nous avons reçu votre commande et vous contacterons bientôt pour confirmer les détails.
-                  Préparez-vous pour une expérience tiramisu incroyable !
+                  Préparez-vous pour une exp��rience tiramisu incroyable !
                 </p>
                 <Button 
                   onClick={() => {
@@ -469,7 +469,10 @@ export default function Order() {
                   </div>
                 </div>
               </div>
-              
+
+              {/* Order Summary */}
+              <OrderSummary control={form.control} />
+
               {/* Delivery Schedule */}
               <div className="grid md:grid-cols-2 gap-8">
                 <FormField
