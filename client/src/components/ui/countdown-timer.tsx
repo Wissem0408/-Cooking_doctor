@@ -38,15 +38,15 @@ export default function CountdownTimer() {
 
   return (
     <div className="bg-gold/10 border border-gold rounded-2xl p-6 mb-12 text-center">
-      <h3 className="font-playfair text-2xl font-bold mb-4 text-espresso">Next Delivery Batch</h3>
+      <h3 className="font-playfair text-2xl font-bold mb-4 text-espresso">Prochain Lot de Livraison</h3>
       <div className="flex justify-center space-x-8 text-espresso">
         <div className="text-center">
           <div className="text-3xl font-bold">{timeLeft.days}</div>
-          <div className="text-sm">Days</div>
+          <div className="text-sm">Jours</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold">{timeLeft.hours}</div>
-          <div className="text-sm">Hours</div>
+          <div className="text-sm">Heures</div>
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold">{timeLeft.minutes}</div>
@@ -54,7 +54,7 @@ export default function CountdownTimer() {
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold">{timeLeft.seconds}</div>
-          <div className="text-sm">Seconds</div>
+          <div className="text-sm">Secondes</div>
         </div>
       </div>
     </div>

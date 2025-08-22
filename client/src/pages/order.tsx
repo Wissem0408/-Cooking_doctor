@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Send, CheckCircle } from "lucide-react";
@@ -18,11 +18,12 @@ import { orderSchema, type Order } from "@shared/schema";
 import { z } from "zod";
 
 const orderFormSchema = z.object({
-  fullName: z.string().min(1, "Full name is required"),
-  phoneNumber: z.string().min(1, "Phone number is required"),
-  deliveryAddress: z.string().min(1, "Delivery address is required"),
-  deliveryDate: z.string().min(1, "Delivery date is required"),
-  deliveryTime: z.string().min(1, "Delivery time is required"),
+  fullName: z.string().min(1, "Le nom complet est requis"),
+  email: z.string().email("L'adresse email n'est pas valide").min(1, "L'email est requis"),
+  phoneNumber: z.string().min(1, "Le numéro de téléphone est requis"),
+  deliveryAddress: z.string().min(1, "La ville de livraison est requise"),
+  deliveryDate: z.string().min(1, "La date de livraison est requise"),
+  deliveryTime: z.string().min(1, "L'heure de livraison est requise"),
   notes: z.string().optional(),
   paymentMethod: z.literal("cash"),
   // Product selections - separate fields for each size
@@ -40,6 +41,80 @@ const orderFormSchema = z.object({
 
 type OrderFormData = z.infer<typeof orderFormSchema>;
 
+interface OrderSummaryProps {
+  control: any;
+}
+
+function OrderSummary({ control }: OrderSummaryProps) {
+  const watchedValues = useWatch({ control });
+
+  // Calculate current order total and check for birthday items
+  const calculateOrderSummary = () => {
+    let total = 0;
+    let hasBirthday = false;
+
+    // Tiramisu items (10 DT small, 15 DT large)
+    const tiramisuItems = [
+      { small: watchedValues.pistacheSmall, large: watchedValues.pistacheLarge, birthday: watchedValues.pistacheBirthday },
+      { small: watchedValues.speculoosSmall, large: watchedValues.speculoosLarge, birthday: watchedValues.speculoosBirthday },
+      { small: watchedValues.noisetteSmall, large: watchedValues.noisetteLarge, birthday: watchedValues.noisetteBirthday }
+    ];
+
+    tiramisuItems.forEach(item => {
+      if (item.small && parseInt(item.small) > 0) total += parseInt(item.small) * 10;
+      if (item.large && parseInt(item.large) > 0) total += parseInt(item.large) * 15;
+      if (item.birthday && parseInt(item.birthday) > 0) hasBirthday = true;
+    });
+
+    // Mousse (10 DT)
+    if (watchedValues.mousse && parseInt(watchedValues.mousse) > 0) {
+      total += parseInt(watchedValues.mousse) * 10;
+    }
+
+    return { total, hasBirthday };
+  };
+
+  const { total, hasBirthday } = calculateOrderSummary();
+  const meetsMinimum = hasBirthday || total >= 60;
+
+  if (total === 0 && !hasBirthday) return null;
+
+  return (
+    <div className={`p-6 rounded-lg border-2 ${meetsMinimum ? 'bg-green-50 border-green-200' : 'bg-yellow-50 border-yellow-200'}`}>
+      <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Résumé de la Commande</h3>
+
+      <div className="space-y-2">
+        {!hasBirthday && (
+          <div className="flex justify-between items-center">
+            <span className="text-espresso">Total actuel:</span>
+            <span className="font-semibold text-espresso">{total} DT</span>
+          </div>
+        )}
+
+        {hasBirthday && (
+          <div className="flex items-center text-gold">
+            <span className="font-semibold">✨ Gâteau d'anniversaire inclus - Pas de minimum requis</span>
+          </div>
+        )}
+
+        {!hasBirthday && total < 60 && (
+          <div className="text-yellow-700 text-sm">
+            <span>Minimum requis: 60 DT</span>
+            <br />
+            <span>Il vous reste: {60 - total} DT à ajouter</span>
+          </div>
+        )}
+
+        {!hasBirthday && total >= 60 && (
+          <div className="text-green-700 text-sm font-semibold">
+            ✅ Minimum atteint - Prêt à commander!
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Order() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
@@ -48,6 +123,7 @@ export default function Order() {
     resolver: zodResolver(orderFormSchema),
     defaultValues: {
       fullName: "",
+      email: "",
       phoneNumber: "",
       deliveryAddress: "",
       deliveryDate: "",
@@ -69,7 +145,12 @@ export default function Order() {
 
   const submitOrderMutation = useMutation({
     mutationFn: async (data: Order) => {
-      const webhookUrl = "https://hook.eu2.make.com/oad631ehh8j4qf7ooslkciijytqe8bfa";
+      const webhookUrl = import.meta.env.VITE_MAKE_WEBHOOK_URL;
+
+      if (!webhookUrl) {
+        throw new Error("Webhook URL not configured");
+      }
+
       return fetch(webhookUrl, {
         method: "POST",
         headers: {
@@ -81,14 +162,14 @@ export default function Order() {
     onSuccess: () => {
       setIsSubmitted(true);
       toast({
-        title: "Order Submitted!",
-        description: "We'll contact you shortly to confirm your order.",
+        title: "Commande Envoyée !",
+        description: "Nous vous contacterons bientôt pour confirmer votre commande.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Order Failed",
-        description: "There was an error submitting your order. Please try again.",
+        title: "Échec de la Commande",
+        description: "Il y a eu une erreur lors de l'envoi de votre commande. Veuillez réessayer.",
         variant: "destructive",
       });
       console.error("Order submission error:", error);
@@ -146,8 +227,26 @@ export default function Order() {
 
     if (products.length === 0) {
       toast({
-        title: "No Products Selected",
-        description: "Please select at least one tiramisu product.",
+        title: "Aucun Produit Sélectionné",
+        description: "Veuillez sélectionner au moins un produit tiramisu.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check if any birthday items are ordered
+    const hasBirthdayItems = products.some(product => product.size === "birthday");
+
+    // Calculate total order value (excluding birthday items which have custom pricing)
+    const totalOrderValue = products
+      .filter(product => product.size !== "birthday")
+      .reduce((total, product) => total + product.price, 0);
+
+    // Validate minimum order amount (60DT) unless birthday items are ordered
+    if (!hasBirthdayItems && totalOrderValue < 60) {
+      toast({
+        title: "Commande Minimum Non Atteinte",
+        description: `La commande minimum est de 60 DT. Votre commande actuelle: ${totalOrderValue} DT. Ajoutez plus d'articles ou commandez un gâteau d'anniversaire.`,
         variant: "destructive",
       });
       return;
@@ -155,6 +254,7 @@ export default function Order() {
 
     const orderData: Order = {
       fullName: data.fullName,
+      email: data.email,
       phoneNumber: data.phoneNumber,
       deliveryAddress: data.deliveryAddress,
       products,
@@ -178,10 +278,10 @@ export default function Order() {
             <Card className="bg-gold/10 border-gold shadow-xl">
               <CardContent className="p-12">
                 <CheckCircle className="w-16 h-16 text-gold mx-auto mb-6" />
-                <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Thank You!</h1>
+                <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Merci !</h1>
                 <p className="text-lg text-espresso/80 mb-6">
-                  We've received your order and will contact you shortly to confirm the details. 
-                  Get ready for an amazing tiramisu experience!
+                  Nous avons reçu votre commande et vous contacterons bientôt pour confirmer les détails.
+                  Préparez-vous pour une expérience tiramisu incroyable !
                 </p>
                 <Button 
                   onClick={() => {
@@ -191,7 +291,7 @@ export default function Order() {
                   variant="outline"
                   className="border-gold text-gold hover:bg-gold hover:text-espresso"
                 >
-                  Place Another Order
+                  Passer une Autre Commande
                 </Button>
               </CardContent>
             </Card>
@@ -207,10 +307,10 @@ export default function Order() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-              Place Your Order
+              Passez Votre Commande
             </h1>
             <p className="text-xl text-espresso/70 max-w-2xl mx-auto">
-              Just a few details and your premium tiramisu will be on its way
+              Juste quelques détails et votre tiramisu premium sera en route
             </p>
           </div>
           
@@ -221,14 +321,14 @@ export default function Order() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Personal Information */}
                 <div className="space-y-6">
-                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Personal Information</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Informations Personnelles</h3>
                   
                   <FormField
                     control={form.control}
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Full Name</FormLabel>
+                        <FormLabel className="text-espresso">Nom Complet</FormLabel>
                         <FormControl>
                           <Input {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                         </FormControl>
@@ -236,13 +336,27 @@ export default function Order() {
                       </FormItem>
                     )}
                   />
-                  
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-espresso">Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
                   <FormField
                     control={form.control}
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Phone Number</FormLabel>
+                        <FormLabel className="text-espresso">Numéro de Téléphone</FormLabel>
                         <FormControl>
                           <Input type="tel" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                         </FormControl>
@@ -256,10 +370,21 @@ export default function Order() {
                     name="deliveryAddress"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-espresso">Delivery Address</FormLabel>
-                        <FormControl>
-                          <Textarea {...field} rows={3} className="bg-warmWhite border-espresso/20 focus:border-gold resize-none" />
-                        </FormControl>
+                        <FormLabel className="text-espresso">Ville de Livraison</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-warmWhite border-espresso/20 focus:border-gold">
+                              <SelectValue placeholder="Sélectionnez votre ville" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Tunis">Tunis</SelectItem>
+                            <SelectItem value="Manouba">Manouba</SelectItem>
+                            <SelectItem value="Hammamet">Hammamet</SelectItem>
+                            <SelectItem value="Sousse">Sousse</SelectItem>
+                            <SelectItem value="Monastir">Monastir</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -268,10 +393,10 @@ export default function Order() {
 
                 {/* Order Details */}
                 <div className="space-y-6">
-                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Order Details</h3>
+                  <h3 className="font-playfair text-2xl font-bold text-espresso mb-4">Détails de la Commande</h3>
                   
                   <div className="space-y-4">
-                    <h4 className="font-semibold text-espresso">Select Your Tiramisu</h4>
+                    <h4 className="font-semibold text-espresso">Choisissez Votre Tiramisu</h4>
                     
                     {/* Tiramisu Pistache */}
                     <div className="p-4 bg-warmWhite rounded-lg border border-espresso/20">
@@ -282,9 +407,9 @@ export default function Order() {
                           name="pistacheSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -294,9 +419,9 @@ export default function Order() {
                           name="pistacheLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -306,9 +431,9 @@ export default function Order() {
                           name="pistacheBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -325,9 +450,9 @@ export default function Order() {
                           name="speculoosSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -337,9 +462,9 @@ export default function Order() {
                           name="speculoosLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -349,9 +474,9 @@ export default function Order() {
                           name="speculoosBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -368,9 +493,9 @@ export default function Order() {
                           name="noisetteSmall"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Small (10 DT)</FormLabel>
+                              <FormLabel className="text-sm">Petit (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -380,9 +505,9 @@ export default function Order() {
                           name="noisetteLarge"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Large (15 DT)</FormLabel>
+                              <FormLabel className="text-sm">Grand (15 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -392,9 +517,9 @@ export default function Order() {
                           name="noisetteBirthday"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm">Birthday (Custom)</FormLabel>
+                              <FormLabel className="text-sm">Anniversaire (Sur mesure)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -413,7 +538,7 @@ export default function Order() {
                             <FormItem>
                               <FormLabel className="text-sm">Sans sucre 72% cacao (10 DT)</FormLabel>
                               <FormControl>
-                                <Input type="number" min="0" max="10" placeholder="Qty" className="w-full" {...field} />
+                                <Input type="number" min="0" max="10" placeholder="Qté" className="w-full" {...field} />
                               </FormControl>
                             </FormItem>
                           )}
@@ -423,7 +548,10 @@ export default function Order() {
                   </div>
                 </div>
               </div>
-              
+
+              {/* Order Summary */}
+              <OrderSummary control={form.control} />
+
               {/* Delivery Schedule */}
               <div className="grid md:grid-cols-2 gap-8">
                 <FormField
@@ -431,7 +559,7 @@ export default function Order() {
                   name="deliveryDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-espresso">Delivery Date</FormLabel>
+                      <FormLabel className="text-espresso">Date de Livraison</FormLabel>
                       <FormControl>
                         <Input type="date" min={today} {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                       </FormControl>
@@ -445,7 +573,7 @@ export default function Order() {
                   name="deliveryTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-espresso">Preferred Time</FormLabel>
+                      <FormLabel className="text-espresso">Heure Préférée</FormLabel>
                       <FormControl>
                         <Input type="time" {...field} className="bg-warmWhite border-espresso/20 focus:border-gold" />
                       </FormControl>
@@ -461,7 +589,7 @@ export default function Order() {
                 name="notes"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-espresso">Special Notes (allergies, occasion, etc.)</FormLabel>
+                    <FormLabel className="text-espresso">Notes Spéciales (allergies, occasion, etc.)</FormLabel>
                     <FormControl>
                       <Textarea {...field} rows={3} className="bg-warmWhite border-espresso/20 focus:border-gold resize-none" />
                     </FormControl>
@@ -476,7 +604,7 @@ export default function Order() {
                 name="paymentMethod"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-espresso font-semibold">Payment Method</FormLabel>
+                    <FormLabel className="text-espresso font-semibold">Méthode de Paiement</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -487,7 +615,7 @@ export default function Order() {
                           <RadioGroupItem value="cash" id="cash" />
                           <label htmlFor="cash" className="flex items-center font-medium">
                             <i className="fas fa-money-bill-wave mr-2 text-gold"></i>
-                            Cash on Delivery
+                            Paiement à la Livraison
                           </label>
                         </div>
                       </RadioGroup>
@@ -505,11 +633,11 @@ export default function Order() {
                   className="w-full md:w-auto bg-gold text-espresso px-12 py-4 rounded-full font-bold text-lg hover:bg-gold/90 transform hover:scale-105 transition-all duration-300 shadow-lg"
                 >
                   {submitOrderMutation.isPending ? (
-                    "Submitting..."
+                    "Envoi en cours..."
                   ) : (
                     <>
                       <Send className="mr-2 w-5 h-5" />
-                      Place Your Order
+                      Passez Votre Commande
                     </>
                   )}
                 </Button>

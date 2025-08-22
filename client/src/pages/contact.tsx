@@ -10,10 +10,10 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-              Get in Touch
+              Contactez-Nous
             </h1>
             <p className="text-xl text-espresso/70 mb-12">
-              Have questions or special requests? We'd love to hear from you
+              Vous avez des questions ou des demandes spéciales ? Nous aimerions avoir de vos nouvelles
             </p>
             
             <div className="grid md:grid-cols-2 gap-8">
@@ -22,26 +22,41 @@ export default function Contact() {
                   <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
                     <Instagram className="text-espresso text-2xl" />
                   </div>
-                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Follow Us</h3>
-                  <p className="text-espresso/70 mb-6">Stay updated with our latest creations and behind-the-scenes content</p>
-                  <Button className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold">
-                    @tiramisubycookingdoctor
+                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Suivez-Nous</h3>
+                  <p className="text-espresso/70 mb-6">Restez informé de nos dernières créations et du contenu en coulisses</p>
+                  <Button
+                    className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold"
+                    asChild
+                  >
+                    <a
+                      href="https://www.instagram.com/cooking_doctor/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      @cooking_doctor
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
-              
+
               <Card className="bg-cream shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="text-espresso text-2xl" />
+                    <Instagram className="text-espresso text-2xl" />
                   </div>
-                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">WhatsApp Order</h3>
-                  <p className="text-espresso/70 mb-6">Quick and easy ordering through WhatsApp</p>
-                  <Button 
+                  <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Suivez-Nous</h3>
+                  <p className="text-espresso/70 mb-6">Restez informé de nos dernières créations et du contenu en coulisses</p>
+                  <Button
                     className="bg-gold text-espresso hover:bg-gold/90 rounded-full font-semibold"
-                    onClick={() => window.open("https://wa.me/YOUR_PHONE_NUMBER?text=Hi, I'd like to order tiramisu!", "_blank")}
+                    asChild
                   >
-                    Message Us
+                    <a
+                      href="https://www.instagram.com/bycookingdoctor/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      @bycookingdoctor
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
@@ -50,12 +65,8 @@ export default function Contact() {
             <div className="mt-12 pt-8 border-t border-espresso/20">
               <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-espresso/60">
                 <div className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  <span>hello@tiramisubycookingdoctor.com</span>
+                  <span>asmahannechi@gmail.com</span>
                 </div>
               </div>
             </div>

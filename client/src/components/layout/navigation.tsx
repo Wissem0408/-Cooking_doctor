@@ -27,16 +27,16 @@ export default function Navigation() {
           
           <div className="hidden md:flex space-x-8">
             <Link href="/" className={`hover:text-gold transition-colors duration-300 ${isActive("/") ? "text-gold" : "text-espresso"}`}>
-              Home
+              Accueil
             </Link>
             <Link href="/menu" className={`hover:text-gold transition-colors duration-300 ${isActive("/menu") ? "text-gold" : "text-espresso"}`}>
               Menu
             </Link>
             <Link href="/order" className={`hover:text-gold transition-colors duration-300 ${isActive("/order") ? "text-gold" : "text-espresso"}`}>
-              Order
+              Commander
             </Link>
             <Link href="/stores" className={`hover:text-gold transition-colors duration-300 ${isActive("/stores") ? "text-gold" : "text-espresso"}`}>
-              Stores
+              Magasins
             </Link>
             <Link href="/contact" className={`hover:text-gold transition-colors duration-300 ${isActive("/contact") ? "text-gold" : "text-espresso"}`}>
               Contact
@@ -55,12 +55,12 @@ export default function Navigation() {
         
         {isOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-3 animate-fade-in">
-            <Link 
+            <Link
               href="/"
               className={`block hover:text-gold transition-colors duration-300 ${isActive("/") ? "text-gold" : "text-espresso"}`}
               onClick={toggleMenu}
             >
-              Home
+              Accueil
             </Link>
             <Link 
               href="/menu"
@@ -69,19 +69,19 @@ export default function Navigation() {
             >
               Menu
             </Link>
-            <Link 
+            <Link
               href="/order"
               className={`block hover:text-gold transition-colors duration-300 ${isActive("/order") ? "text-gold" : "text-espresso"}`}
               onClick={toggleMenu}
             >
-              Order
+              Commander
             </Link>
-            <Link 
+            <Link
               href="/stores"
               className={`block hover:text-gold transition-colors duration-300 ${isActive("/stores") ? "text-gold" : "text-espresso"}`}
               onClick={toggleMenu}
             >
-              Stores
+              Magasins
             </Link>
             <Link 
               href="/contact"

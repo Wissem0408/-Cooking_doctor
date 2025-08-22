@@ -16,10 +16,10 @@ export default function InstagramGallery() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-            Follow Our Journey
+            Suivez Notre Parcours
           </h2>
           <p className="text-xl text-espresso/70 max-w-2xl mx-auto">
-            Join our Instagram family and witness the magic behind each creation
+            Rejoignez notre famille Instagram et découvrez la magie derrière chaque création
           </p>
         </div>
         
@@ -31,7 +31,7 @@ export default function InstagramGallery() {
             >
               <img 
                 src={image}
-                alt={`Instagram post ${index + 1}`}
+                alt={`Publication Instagram ${index + 1}`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -39,12 +39,19 @@ export default function InstagramGallery() {
         </div>
         
         <div className="text-center mt-12">
-          <Button 
+          <Button
             variant="outline"
             className="bg-gold text-espresso border-gold hover:bg-gold/90 px-8 py-4 rounded-full font-semibold"
+            asChild
           >
-            <Instagram className="mr-3 w-5 h-5" />
-            Follow @tiramisubycookingdoctor
+            <a
+              href="https://www.instagram.com/cooking_doctor/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="mr-3 w-5 h-5" />
+              @cooking_doctor
+            </a>
           </Button>
         </div>
       </div>

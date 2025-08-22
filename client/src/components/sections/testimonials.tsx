@@ -5,23 +5,23 @@ export default function Testimonials() {
   const testimonials = [
     {
       rating: 5,
-      text: "Absolutely divine! The classic tiramisu transported me straight to Italy. You can taste the love and quality in every bite.",
+      text: "Absolument divin ! Le tiramisu classique m'a transporté directement en Italie. On peut goûter l'amour et la qualité dans chaque bouchée.",
       author: "Maria Rodriguez",
-      role: "Loyal Customer",
+      role: "Cliente Fidèle",
       initial: "M",
     },
     {
       rating: 5,
-      text: "Perfect for our anniversary celebration! The presentation was beautiful and the taste was even better. Highly recommend!",
+      text: "Parfait pour notre célébration d'anniversaire ! La présentation était magnifique et le goût encore meilleur. Je recommande vivement !",
       author: "Alessandro Thompson",
-      role: "Special Occasions",
+      role: "Occasions Spéciales",
       initial: "A",
     },
     {
       rating: 5,
-      text: "The pistachio tiramisu is out of this world! As an Italian myself, I can confirm this is the real deal. Bravissimo!",
+      text: "Le tiramisu à la pistache est extraordinaire ! En tant qu'Italien moi-même, je peux confirmer que c'est du vrai. Bravissimo !",
       author: "Sofia Chen",
-      role: "Food Enthusiast",
+      role: "Passionnée de Cuisine",
       initial: "S",
     },
   ];
@@ -31,10 +31,10 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-espresso">
-            What Our Customers Say
+            Ce Que Disent Nos Clients
           </h2>
           <p className="text-xl text-espresso/70 max-w-2xl mx-auto">
-            Every review tells a story of satisfaction and joy
+            Chaque avis raconte une histoire de satisfaction et de joie
           </p>
         </div>
         
