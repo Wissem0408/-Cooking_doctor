@@ -41,6 +41,80 @@ const orderFormSchema = z.object({
 
 type OrderFormData = z.infer<typeof orderFormSchema>;
 
+interface OrderSummaryProps {
+  control: any;
+}
+
+function OrderSummary({ control }: OrderSummaryProps) {
+  const watchedValues = useWatch({ control });
+
+  // Calculate current order total and check for birthday items
+  const calculateOrderSummary = () => {
+    let total = 0;
+    let hasBirthday = false;
+
+    // Tiramisu items (10 DT small, 15 DT large)
+    const tiramisuItems = [
+      { small: watchedValues.pistacheSmall, large: watchedValues.pistacheLarge, birthday: watchedValues.pistacheBirthday },
+      { small: watchedValues.speculoosSmall, large: watchedValues.speculoosLarge, birthday: watchedValues.speculoosBirthday },
+      { small: watchedValues.noisetteSmall, large: watchedValues.noisetteLarge, birthday: watchedValues.noisetteBirthday }
+    ];
+
+    tiramisuItems.forEach(item => {
+      if (item.small && parseInt(item.small) > 0) total += parseInt(item.small) * 10;
+      if (item.large && parseInt(item.large) > 0) total += parseInt(item.large) * 15;
+      if (item.birthday && parseInt(item.birthday) > 0) hasBirthday = true;
+    });
+
+    // Mousse (10 DT)
+    if (watchedValues.mousse && parseInt(watchedValues.mousse) > 0) {
+      total += parseInt(watchedValues.mousse) * 10;
+    }
+
+    return { total, hasBirthday };
+  };
+
+  const { total, hasBirthday } = calculateOrderSummary();
+  const meetsMinimum = hasBirthday || total >= 60;
+
+  if (total === 0 && !hasBirthday) return null;
+
+  return (
+    <div className={`p-6 rounded-lg border-2 ${meetsMinimum ? 'bg-green-50 border-green-200' : 'bg-yellow-50 border-yellow-200'}`}>
+      <h3 className="font-playfair text-xl font-bold mb-4 text-espresso">Résumé de la Commande</h3>
+
+      <div className="space-y-2">
+        {!hasBirthday && (
+          <div className="flex justify-between items-center">
+            <span className="text-espresso">Total actuel:</span>
+            <span className="font-semibold text-espresso">{total} DT</span>
+          </div>
+        )}
+
+        {hasBirthday && (
+          <div className="flex items-center text-gold">
+            <span className="font-semibold">✨ Gâteau d'anniversaire inclus - Pas de minimum requis</span>
+          </div>
+        )}
+
+        {!hasBirthday && total < 60 && (
+          <div className="text-yellow-700 text-sm">
+            <span>Minimum requis: 60 DT</span>
+            <br />
+            <span>Il vous reste: {60 - total} DT à ajouter</span>
+          </div>
+        )}
+
+        {!hasBirthday && total >= 60 && (
+          <div className="text-green-700 text-sm font-semibold">
+            ✅ Minimum atteint - Prêt à commander!
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Order() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
@@ -202,7 +276,7 @@ export default function Order() {
                 <h1 className="font-playfair text-3xl font-bold text-espresso mb-4">Merci !</h1>
                 <p className="text-lg text-espresso/80 mb-6">
                   Nous avons reçu votre commande et vous contacterons bientôt pour confirmer les détails.
-                  Préparez-vous pour une exp��rience tiramisu incroyable !
+                  Préparez-vous pour une expérience tiramisu incroyable !
                 </p>
                 <Button 
                   onClick={() => {
