@@ -107,6 +107,28 @@ export function setupSecurity(app: Express) {
     res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
     next();
   });
+
+  // Security monitoring middleware
+  app.use((req, res, next) => {
+    const clientIP = req.ip || req.connection.remoteAddress;
+    const userAgent = req.get('User-Agent');
+
+    // Log suspicious activity
+    if (req.path.includes('..') || req.path.includes('<script>') || req.path.includes('SELECT')) {
+      console.warn(`🚨 Suspicious request from ${clientIP}: ${req.method} ${req.path}`, {
+        userAgent,
+        body: req.body,
+        query: req.query
+      });
+    }
+
+    // Log API requests in production for monitoring
+    if (process.env.NODE_ENV === "production" && req.path.startsWith('/api/')) {
+      console.log(`API Request: ${req.method} ${req.path} from ${clientIP}`);
+    }
+
+    next();
+  });
 }
 
 // Input validation helpers
