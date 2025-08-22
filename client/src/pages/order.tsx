@@ -146,6 +146,11 @@ export default function Order() {
   const submitOrderMutation = useMutation({
     mutationFn: async (data: Order) => {
       const webhookUrl = import.meta.env.VITE_MAKE_WEBHOOK_URL;
+
+      if (!webhookUrl) {
+        throw new Error("Webhook URL not configured");
+      }
+
       return fetch(webhookUrl, {
         method: "POST",
         headers: {
