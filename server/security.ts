@@ -37,16 +37,20 @@ const orderLimiter = rateLimit({
 export function setupSecurity(app: Express) {
   const isDevelopment = process.env.NODE_ENV === "development";
 
-  // CORS configuration
-  const corsOptions = {
-    origin: isDevelopment
-      ? ["http://localhost:5000", "http://localhost:3000", "http://localhost:4173"]
-      : ["https://your-domain.com"], // Replace with your actual production domain
-    credentials: true,
-    optionsSuccessStatus: 200,
-  };
-
-  app.use(cors(corsOptions));
+  // CORS configuration - more permissive for development
+  if (isDevelopment) {
+    app.use(cors({
+      origin: true, // Allow all origins in development
+      credentials: true,
+      optionsSuccessStatus: 200,
+    }));
+  } else {
+    app.use(cors({
+      origin: ["https://your-domain.com"], // Replace with your actual production domain
+      credentials: true,
+      optionsSuccessStatus: 200,
+    }));
+  }
 
   // Helmet for security headers with development-friendly settings
   if (isDevelopment) {
