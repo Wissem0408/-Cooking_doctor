@@ -145,7 +145,7 @@ export default function Order() {
 
   const submitOrderMutation = useMutation({
     mutationFn: async (data: Order) => {
-      const webhookUrl = "https://hook.eu2.make.com/oad631ehh8j4qf7ooslkciijytqe8bfa";
+      const webhookUrl = import.meta.env.VITE_MAKE_WEBHOOK_URL;
       return fetch(webhookUrl, {
         method: "POST",
         headers: {
